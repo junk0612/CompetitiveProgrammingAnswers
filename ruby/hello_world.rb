@@ -1,1 +1,2 @@
-﻿puts 'Hello world'
+﻿#! ruby -Ku
+puts 'Hello world'
