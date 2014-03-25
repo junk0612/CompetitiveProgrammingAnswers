@@ -1,3 +1,3 @@
-ICPC
+AOJAnswers
 ====
-ICPCの過去問に対する解答が言語別に保存してあります
+[AIZU ONLINE JUDGE](http://judge.u-aizu.ac.jp/onlinejudge/index.jsp)に公開されている問題の解答例を保存しています
