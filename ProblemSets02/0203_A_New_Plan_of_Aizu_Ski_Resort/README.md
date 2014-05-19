@@ -1,4 +1,4 @@
-A New Plan of Aizu Ski Resort/会津山スキー場の新企画
+A New Plan of Aizu Ski Resort / 会津山スキー場の新企画
 =
 Problem Statements
 -
