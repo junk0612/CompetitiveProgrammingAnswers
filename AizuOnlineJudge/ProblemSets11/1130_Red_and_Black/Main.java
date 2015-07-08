@@ -1,60 +1,51 @@
-import java.util.*;
+// Red and Black
+import java.util.Scanner;
 
-public class Red_and_Black {
-	static int r;
-	static int w;
-	static int h;
+public class Main {
+	int w, h;
+	String[] field;
+	boolean[][] visited;
 
 	public static void main(String[] args) {
+		new Main().run();
+	}
+
+	void run() {
 		Scanner sc = new Scanner(System.in);
 		while (true) {
 			w = sc.nextInt();
 			h = sc.nextInt();
-			if (w == 0 && h == 0)
+			if ((w | h) == 0)
 				break;
-			r = 0;
-			int x = 0;
-			int y = 0;
-			String fs;
-			int[][] fi = new int[h][w];
-			int[][] l = new int[h][w];
+			field = new String[h];
+			visited = new boolean[h][w];
+			int result = 0;
 			for (int i = 0; i < h; i++)
-				for (int j = 0; j < w; j++)
-					l[i][j] = 0;
+				field[i] = sc.next();
 			for (int i = 0; i < h; i++) {
-				fs = sc.next();
 				for (int j = 0; j < w; j++) {
-					if (fs.charAt(j) == '.')
-						fi[i][j] = 1;
-					if (fs.charAt(j) == '#')
-						fi[i][j] = 0;
-					if (fs.charAt(j) == '@') {
-						fi[i][j] = 1;
-						x = i;
-						y = j;
+					if (field[i].charAt(j) == '@') {
+						result = visit(j, i);
+						break;
 					}
 				}
 			}
-			loop(x, y, fi, l);
-			System.out.println(r);
+			System.out.println(result);
 		}
 		sc.close();
 	}
 
-	public static void loop(int x, int y, int[][] fi, int[][] l) {
-		r++;
-		l[x][y] = 1;
-		if (x > 0)
-			if (fi[x - 1][y] != 0 && l[x - 1][y] == 0)
-				loop(x - 1, y, fi, l);
-		if (x < h - 1)
-			if (fi[x + 1][y] != 0 && l[x + 1][y] == 0)
-				loop(x + 1, y, fi, l);
-		if (y > 0)
-			if (fi[x][y - 1] != 0 && l[x][y - 1] == 0)
-				loop(x, y - 1, fi, l);
-		if (y < w - 1)
-			if (fi[x][y + 1] != 0 && l[x][y + 1] == 0)
-				loop(x, y + 1, fi, l);
+	int visit(int x, int y) {
+		int result = 1;
+		visited[y][x] = true;
+		if (x > 0 && field[y].charAt(x - 1) != '#' && !visited[y][x - 1])
+			result += visit(x - 1, y);
+		if (x < w - 1 && field[y].charAt(x + 1) != '#' && !visited[y][x + 1])
+			result += visit(x + 1, y);
+		if (y > 0 && field[y - 1].charAt(x) != '#' && !visited[y - 1][x])
+			result += visit(x, y - 1);
+		if (y < h - 1 && field[y + 1].charAt(x) != '#' && !visited[y + 1][x])
+			result += visit(x, y + 1);
+		return result;
 	}
 }
